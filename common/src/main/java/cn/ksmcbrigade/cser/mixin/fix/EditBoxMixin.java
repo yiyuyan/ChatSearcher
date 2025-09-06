@@ -29,8 +29,9 @@ public abstract class EditBoxMixin extends AbstractWidget implements Renderable 
     @Inject(method = "onClick",at = @At(value = "TAIL"))
     public void onClick(double pMouseX, double pMouseY, CallbackInfo ci){
         if(Minecraft.getInstance().screen instanceof ChatScreen chatScreen){
-            ((IChatScreen) chatScreen).chatSearcher$setNoFocus();
-            this.setFocused(true);
+            if(this.getMessage().equals(Component.translatable("chat.editBox"))){
+                ((IChatScreen) chatScreen).chatSearcher$reset();
+            }
         }
     }
 }
